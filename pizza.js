@@ -2,10 +2,23 @@ class Pizza {
   constructor(crust, size) {
     this.toppings = ["cheese"];
     this.crust = crust;
-    this.size = size;
+    this._size = size;
   }
   addTopping(topping) {
     this.toppings.push(topping);
+  }
+  set size(size) {
+    if (size === "s" || size === "m" || size === "l") {
+      this._size = size;
+    }
+  }
+  get size() {
+    return this._size;
+  }
+  get price() {
+    const basePrice = 10;
+    const toppingPrice = 2;
+    return basePrice + this.toppings.length * toppingPrice;
   }
 }
 
@@ -21,3 +34,8 @@ console.log(pizza2.toppings);
 pizza2.addTopping("more cheese");
 console.log(pizza2.toppings);
 console.log(pizza2);
+
+let pizza = new Pizza();
+pizza.size = "l";
+console.log(pizza.size);
+console.log(pizza.price);
